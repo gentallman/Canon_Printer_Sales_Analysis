@@ -143,45 +143,147 @@ SET Gender = (SELECT TOP 1 Gender FROM Dealer GROUP BY Gender ORDER BY COUNT(*) 
 
 ## Business Problems and Solutions
 
+### 1. Total Purchase Amount for Each Dealer
+```sql
+SELECT 
+	d.DealerName, 
+	sum(d23.PurchaseAmount) + sum(d24.PurchaseAmount) as Total_Purchase 
+from 
+	Dealer as d
+	JOIN Purchase_2023 as d23
+	ON d.DealerID = d23.DealerID
+	
+	JOIN Purchase_2024 as d24
+	on d.DealerID = d24.DealerID
+GROUP BY 
+	d.DealerName
+ORDER BY 
+	Total_Purchase
+```
+### 2. Average Purchase Amount for Each Printer Model 
+```sql
+SELECT
+    PrinterModel,
+    ROUND(AVG(PurchaseAmount), 2) AS AvgPurchase
+FROM
+    (
+        SELECT PrinterModel, PurchaseAmount FROM Purchase_2023
+        UNION ALL
+        SELECT PrinterModel, PurchaseAmount FROM Purchase_2024
+    ) AS TotalPurchase23_24
+GROUP BY
+    PrinterModel
+ORDER BY
+    AvgPurchase DESC;  
+```
+### 3. Top 3 Dealers with the Highest Total Purchase Amount
+```sql
+SELECT TOP 3
+    d.DealerName, 
+    SUM(d23.PurchaseAmount) + SUM(d24.PurchaseAmount) AS Total_Purchase 
+FROM 
+    Dealer AS d
+    LEFT JOIN Purchase_2023 AS d23 ON d.DealerID = d23.DealerID
+    LEFT JOIN Purchase_2024 AS d24 ON d.DealerID = d24.DealerID
+GROUP BY 
+    d.DealerName
+ORDER BY 
+    Total_Purchase DESC;
+```
+### 4. Dealer(s) with the Highest Single Purchase Amount in 2024
 ```sql
 
+SELECT
+    d.DealerID,
+    d.DealerName,
+    p.PurchaseAmount
+FROM
+    Purchase_2024 p
+    JOIN Dealer d ON p.DealerID = d.DealerID
+WHERE
+    p.PurchaseAmount = (SELECT MAX(PurchaseAmount) FROM Purchase_2024);
 ```
-
+### 5. Number of Purchases by Each Dealer
 ```sql
-
+SELECT
+    d.DealerID,
+    d.DealerName,
+    COUNT(*) AS NumberOfPurchases
+FROM 
+    Dealer d
+    JOIN (
+        SELECT DealerID FROM Purchase_2023
+        UNION ALL
+        SELECT DealerID FROM Purchase_2024
+    ) p ON d.DealerID = p.DealerID
+GROUP BY
+    d.DealerID, d.DealerName
+ORDER BY 
+    NumberOfPurchases DESC;
 ```
-
+### 6. Location with the Highest Single Purchase Amount in 2023
 ```sql
-
+SELECT
+    d.Location,
+    p.PurchaseAmount
+FROM 
+    Dealer d
+    JOIN Purchase_2023 p ON d.DealerID = p.DealerID
+WHERE 
+    p.PurchaseAmount = (SELECT MAX(PurchaseAmount) FROM Purchase_2023);
 ```
-
+### 7. Location with the Highest Total Purchase Amount in 2023
 ```sql
-
+-- Calculate the total purchase amount per location in 2023
+WITH TotalPurchasePerLocation AS (
+    SELECT
+        d.Location,
+        SUM(p.PurchaseAmount) AS TotalPurchaseAmount
+    FROM 
+        Dealer d
+        JOIN Purchase_2023 p ON d.DealerID = p.DealerID
+    GROUP BY
+        d.Location
+)
+-- Select the location with the highest total purchase amount
+SELECT 
+    Location,
+    TotalPurchaseAmount
+FROM
+    TotalPurchasePerLocation
+WHERE 
+    TotalPurchaseAmount = (SELECT MAX(TotalPurchaseAmount) FROM TotalPurchasePerLocation);
 ```
-
+### 8. Printer Models with Total Purchase Amount Exceeding $60,000
 ```sql
-
+SELECT 
+    PrinterModel,
+    SUM(PurchaseAmount) AS TotalPurchaseAmount
+FROM
+    (
+        SELECT PrinterModel, PurchaseAmount FROM Purchase_2023
+        UNION ALL
+        SELECT PrinterModel, PurchaseAmount FROM Purchase_2024
+    ) AS CombinedPurchase
+GROUP BY
+    PrinterModel
+HAVING
+    SUM(PurchaseAmount) > 60000;
 ```
-
+### 9.  Dealers with More Than 3 Purchases in 2024
 ```sql
-
+SELECT 
+    d.DealerName,
+    COUNT(*) AS NumberOfPurchases
+FROM 
+    Dealer d
+    JOIN Purchase_2024 p ON d.DealerID = p.DealerID
+GROUP BY 
+    d.DealerName
+HAVING
+    COUNT(*) > 3;
 ```
 
-```sql
-
-```
-
-```sql
-
-```
-
-```sql
-
-```
-
-```sql
-
-```
 
 ```sql
 
