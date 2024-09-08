@@ -4,8 +4,13 @@
   <img src="https://github.com/user-attachments/assets/8c37b72f-a058-467c-b01d-69cf0cb8310d" width="300">
 </p>
 
+### Purpose
+- The purpose of this work is to practice and demonstrate SQL concepts, including JOINs, Common Table Expressions (CTEs), UNION, HAVING, ORDER BY, GROUP BY, and Data Definition Language (DDL) and Data Manipulation Language (DML) operations. This project will also cover the use of primary and foreign key constraints.
+
+- Additionally, for broader practice for data reporting, another mock sales data will be analyzed in Excel to create pivot charts and dashboards.
+
 ### Overview
-This project involves a comprehensive analysis of Canon printer and dealer data using SQL. The objective is to assess the performance of various dealers across the years 2023 and 2024. The analysis aims to provide insights into purchasing trends, dealer performance, and printer model popularity based on transactional data.
+This work involves a comprehensive analysis of Canon printer and dealer data using SQL. The objective is to assess the performance of various dealers across the years 2023 and 2024. The analysis aims to provide insights into purchasing trends, dealer performance, and printer model popularity based on transactional data.
 
 ### Objectives:
 
@@ -160,6 +165,19 @@ GROUP BY
 ORDER BY 
 	Total_Purchase
 ```
+| DealerName                  | Total_Purchase |
+|-----------------------------|----------------|
+| Gadget Galaxy               | 11,700.00      |
+| Smart Choice Electronics    | 12,500.00      |
+| Electro Hub                 | 13,900.00      |
+| Digital Dynamics            | 14,700.00      |
+| NextGen Technologies        | 16,500.00      |
+| John Doe Electronics        | 51,000.00      |
+| Innovative Solutions        | 63,400.00      |
+| Future Tech                 | 71,400.00      |
+| Techie World                | 111,600.00     |
+| Jane Smith Gadgets          | 115,800.00     |
+
 ### 2. Average Purchase Amount for Each Printer Model 
 ```sql
 SELECT
@@ -176,6 +194,13 @@ GROUP BY
 ORDER BY
     AvgPurchase DESC;  
 ```
+| PrinterModel | AvgPurchase |
+|--------------|-------------|
+| Printer C    | 8,030.00    |
+| Printer B    | 7,200.00    |
+| Printer D    | 6,933.33    |
+| Printer A    | 6,700.00    |
+
 ### 3. Top 3 Dealers with the Highest Total Purchase Amount
 ```sql
 SELECT TOP 3
@@ -190,6 +215,12 @@ GROUP BY
 ORDER BY 
     Total_Purchase DESC;
 ```
+| DealerName            | Total_Purchase |
+|-----------------------|----------------|
+| Jane Smith Gadgets    | 115,800.00     |
+| Techie World          | 111,600.00     |
+| Future Tech           | 71,400.00      |
+
 ### 4. Dealer(s) with the Highest Single Purchase Amount in 2024
 ```sql
 
@@ -203,6 +234,11 @@ FROM
 WHERE
     p.PurchaseAmount = (SELECT MAX(PurchaseAmount) FROM Purchase_2024);
 ```
+| DealerID | DealerName | PurchaseAmount |
+|----------|------------|----------------|
+| 4        | Future Tech | 9500.00        |
+
+
 ### 5. Number of Purchases by Each Dealer
 ```sql
 SELECT
@@ -221,6 +257,19 @@ GROUP BY
 ORDER BY 
     NumberOfPurchases DESC;
 ```
+| DealerID | DealerName                | NumberOfPurchases |
+|----------|---------------------------|-------------------|
+| 2        | Jane Smith Gadgets        | 6                 |
+| 3        | Techie World              | 6                 |
+| 4        | Future Tech               | 4                 |
+| 5        | Innovative Solutions      | 4                 |
+| 1        | John Doe Electronics      | 4                 |
+| 6        | Smart Choice Electronics  | 2                 |
+| 7        | Gadget Galaxy             | 2                 |
+| 8        | Electro Hub               | 2                 |
+| 9        | Digital Dynamics          | 2                 |
+| 10       | NextGen Technologies      | 2                 |
+
 ### 6. Location with the Highest Single Purchase Amount in 2023
 ```sql
 SELECT
@@ -232,6 +281,10 @@ FROM
 WHERE 
     p.PurchaseAmount = (SELECT MAX(PurchaseAmount) FROM Purchase_2023);
 ```
+| Location | PurchaseAmount |
+|----------|----------------|
+| Calgary  | 9,000.00       |
+
 ### 7. Location with the Highest Total Purchase Amount in 2023
 ```sql
 -- Calculate the total purchase amount per location in 2023
@@ -254,6 +307,10 @@ FROM
 WHERE 
     TotalPurchaseAmount = (SELECT MAX(TotalPurchaseAmount) FROM TotalPurchasePerLocation);
 ```
+| Location  | TotalPurchaseAmount |
+|-----------|---------------------|
+| Vancouver | 27,500.00           |
+
 ### 8. Printer Models with Total Purchase Amount Exceeding $60,000
 ```sql
 SELECT 
@@ -270,6 +327,11 @@ GROUP BY
 HAVING
     SUM(PurchaseAmount) > 60000;
 ```
+| PrinterModel | TotalPurchaseAmount |
+|--------------|----------------------|
+| Printer A    | 64,600.00            |
+| Printer C    | 77,000.00            |
+
 ### 9.  Dealers with More Than 3 Purchases in 2024
 ```sql
 SELECT 
@@ -283,12 +345,7 @@ GROUP BY
 HAVING
     COUNT(*) > 3;
 ```
+| DealerName   | NumberOfPurchases |
+|--------------|-------------------|
+| Techie World | 4                 |
 
-
-```sql
-
-```
-
-```sql
-
-```
