@@ -58,6 +58,18 @@ VALUES
 (9, 'Digital Dynamics', 'London', 29, 'F', '519-555-0109'),
 (10, 'NextGen Technologies', 'Quebec City', NULL, 'M', '418-555-0110');
 ```
+| DealerID | DealerName                | Location      | Age | Gender | ContactNumber |
+|----------|---------------------------|---------------|-----|--------|---------------|
+| 1        | John Doe Electronics      | Toronto       | 45  | M      | 416-555-0101  |
+| 2        | Jane Smith Gadgets        | Vancouver     | 39  | F      | 604-555-0102  |
+| 3        | Techie World              | Montreal      | 36  | NULL   | 514-555-0103  |
+| 4        | Future Tech               | Calgary       | 42  | F      | 403-555-0104  |
+| 5        | Innovative Solutions      | Ottawa        | 36  | M      | 613-555-0105  |
+| 6        | Smart Choice Electronics  | Edmonton      | 40  | M      | 780-555-0106  |
+| 7        | Gadget Galaxy             | Halifax       | 32  | F      | 902-555-0107  |
+| 8        | Electro Hub               | Victoria      | NULL| M      | 250-555-0108  |
+| 9        | Digital Dynamics          | London        | 29  | F      | 519-555-0109  |
+| 10       | NextGen Technologies      | Quebec City   | NULL| M      | 418-555-0110  |
 
 ```sql
 -- Create the Purchase Table for 2023
@@ -91,6 +103,25 @@ VALUES
 (16, 2, '2023-09-10', 6400.00, 'Printer A'),
 (17, 2, '2023-04-19', 7100.00, 'Printer C');
 ```
+| PurchaseID | DealerID | PurchaseDate | PurchaseAmount | PrinterModel |
+|------------|----------|--------------|----------------|--------------|
+| 1          | 1        | 2023-01-15   | 5,000.00       | Printer A    |
+| 2          | 1        | 2023-05-22   | 7,000.00       | Printer B    |
+| 3          | 2        | 2023-03-10   | 8,000.00       | Printer C    |
+| 4          | 2        | 2023-08-14   | 6,000.00       | Printer D    |
+| 5          | 3        | 2023-07-30   | 6,500.00       | Printer A    |
+| 6          | 3        | 2023-11-05   | 7,200.00       | Printer B    |
+| 7          | 4        | 2023-09-15   | 9,000.00       | Printer C    |
+| 8          | 4        | 2023-12-10   | 8,500.00       | Printer D    |
+| 9          | 5        | 2023-04-20   | 7,500.00       | Printer A    |
+| 10         | 5        | 2023-10-18   | 8,000.00       | Printer B    |
+| 11         | 6        | 2023-02-25   | 6,200.00       | Printer C    |
+| 12         | 7        | 2023-06-30   | 5,800.00       | Printer D    |
+| 13         | 8        | 2023-07-22   | 6,900.00       | Printer A    |
+| 14         | 9        | 2023-09-05   | 7,300.00       | Printer B    |
+| 15         | 10       | 2023-11-15   | 8,200.00       | Printer C    |
+| 16         | 2        | 2023-09-10   | 6,400.00       | Printer A    |
+| 17         | 2        | 2023-04-19   | 7,100.00       | Printer C    |
 
 ```sql
 -- Create the Purchase Table for 2024
@@ -124,6 +155,25 @@ VALUES
 (16, 3, '2024-11-20', 4600.00, 'Printer B'),
 (17, 3, '2024-06-12', 9200.00, 'Printer C');
 ```
+| PurchaseID | DealerID | PurchaseDate | PurchaseAmount | PrinterModel |
+|------------|----------|--------------|----------------|--------------|
+| 1          | 1        | 2024-01-20   | 6,000.00       | Printer A    |
+| 2          | 1        | 2024-06-25   | 7,500.00       | Printer B    |
+| 3          | 2        | 2024-04-05   | 8,500.00       | Printer C    |
+| 4          | 2        | 2024-08-10   | 6,700.00       | Printer D    |
+| 5          | 3        | 2024-03-15   | 7,000.00       | Printer A    |
+| 6          | 3        | 2024-09-20   | 7,600.00       | Printer B    |
+| 7          | 4        | 2024-05-10   | 9,500.00       | Printer C    |
+| 8          | 4        | 2024-11-25   | 8,700.00       | Printer D    |
+| 9          | 5        | 2024-07-30   | 8,000.00       | Printer A    |
+| 10         | 5        | 2024-12-15   | 8,200.00       | Printer B    |
+| 11         | 6        | 2024-01-15   | 6,300.00       | Printer C    |
+| 12         | 7        | 2024-05-20   | 5,900.00       | Printer D    |
+| 13         | 8        | 2024-08-30   | 7,000.00       | Printer A    |
+| 14         | 9        | 2024-10-15   | 7,400.00       | Printer B    |
+| 15         | 10       | 2024-12-05   | 8,300.00       | Printer C    |
+| 16         | 3        | 2024-11-20   | 4,600.00       | Printer B    |
+| 17         | 3        | 2024-06-12   | 9,200.00       | Printer C    |
 
 ### Data Cleaning
 ```sql
@@ -132,6 +182,11 @@ SELECT *
 FROM Dealer
 WHERE Age IS NULL OR Gender IS NULL;
 ```
+| DealerID | DealerName              | Location     | Age | Gender | ContactNumber |
+|----------|-------------------------|--------------|-----|--------|---------------|
+| 3        | Techie World            | Montreal     | 36  | NULL   | 514-555-0103  |
+| 8        | Electro Hub             | Victoria     | NULL| M      | 250-555-0108  |
+| 10       | NextGen Technologies    | Quebec City  | NULL| M      | 418-555-0110  |
 
 ```sql
 -- Replace NULL values in Age with the average age 
@@ -139,12 +194,28 @@ UPDATE Dealer
 SET Age = (SELECT AVG(Age) FROM Dealer WHERE Age IS NOT NULL)
 WHERE Age IS NULL;
 ```
-
+(2 rows affected)
 ```sql
 -- Replace NULL values in Gender with the most frequent gender (e.g., 'M')
 UPDATE Dealer
 SET Gender = (SELECT TOP 1 Gender FROM Dealer GROUP BY Gender ORDER BY COUNT(*) DESC) WHERE Gender IS NULL;
 ```
+(1 row affected)
+
+```sql
+SELECT * FROM Dealer
+```| DealerID | DealerName                | Location       | Age | Gender | ContactNumber |
+|----------|---------------------------|----------------|-----|--------|---------------|
+| 1        | John Doe Electronics      | Toronto        | 45  | M      | 416-555-0101  |
+| 2        | Jane Smith Gadgets        | Vancouver      | 39  | F      | 604-555-0102  |
+| 3        | Techie World              | Montreal       | 36  | M      | 514-555-0103  |
+| 4        | Future Tech               | Calgary        | 42  | F      | 403-555-0104  |
+| 5        | Innovative Solutions      | Ottawa         | 36  | M      | 613-555-0105  |
+| 6        | Smart Choice Electronics  | Edmonton       | 40  | M      | 780-555-0106  |
+| 7        | Gadget Galaxy             | Halifax        | 32  | F      | 902-555-0107  |
+| 8        | Electro Hub               | Victoria       | 37  | M      | 250-555-0108  |
+| 9        | Digital Dynamics          | London         | 29  | F      | 519-555-0109  |
+| 10       | NextGen Technologies      | Quebec City    | 37  | M      | 418-555-0110  |
 
 ## Business Problems and Solutions
 
