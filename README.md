@@ -5,9 +5,15 @@
 </p>
 
 ### Purpose
-- The purpose of this work is to practice and demonstrate SQL concepts, including JOINs, Common Table Expressions (CTEs), UNION, HAVING, ORDER BY, GROUP BY, and Data Definition Language (DDL) and Data Manipulation Language (DML) operations. This project will also cover the use of primary and foreign key constraints.
-
-- Additionally, for broader practice for data reporting, another mock sales data will be analyzed in Excel to create pivot charts and dashboards.
+ The purpose of this work is to practice and demonstrate SQL concepts, including
+```diff
+- JOINs
+- Common Table Expressions (CTEs)
+- UNION
+! Claues : HAVING, ORDER BY, GROUP BY
+# Data Definition Language (DDL) and Data Manipulation Language (DML) operations
+@@ Primary and Foreign Key Constraints@@
+```
 
 ### Overview
 This work involves a comprehensive analysis of Canon printer and dealer data using SQL. The objective is to assess the performance of various dealers across the years 2023 and 2024. The analysis aims to provide insights into purchasing trends, dealer performance, and printer model popularity based on transactional data.
