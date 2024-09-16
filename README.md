@@ -10,7 +10,7 @@
 - JOINs
 - Common Table Expressions (CTEs)
 - UNION
-! Claues : HAVING, ORDER BY, GROUP BY
+! Clauses : HAVING, ORDER BY, GROUP BY
 # Data Definition Language (DDL) and Data Manipulation Language (DML) operations
 @@ Primary and Foreign Key Constraints@@
 ```
