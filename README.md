@@ -1,7 +1,7 @@
 <h2 align="center"> Canon Printer Sales Analysis with SQL [MOCK DATA] </h2>
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/67358585-5b89-45ce-8ea1-57df3f29ec13" width="600">
+  <img src="https://github.com/user-attachments/assets/67358585-5b89-45ce-8ea1-57df3f29ec13" width="300">
 </p>
 
 ### Purpose
