@@ -20,12 +20,12 @@ This work involves a comprehensive analysis of Canon printer and dealer data usi
 
 ### Objectives:
 
-1. **Data Preparation and Cleaning:**
-2. **Dealer Performance Analysis:**
-3. **Printer Model Analysis:**
-4. **Top Dealers and Insights:**
-5. **Geographic Analysis:**
-6. **Active Dealers Analysis:**
+1. **Data Preparation and Cleanin**
+2. **Dealer Performance Analysis**
+3. **Printer Model Analysis**
+4. **Top Dealers and Insights**
+5. **Geographic Analysis**
+6. **Active Dealers Analysis**
 
 ### Schema
 
